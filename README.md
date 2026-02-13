@@ -5,13 +5,14 @@ A shared ESLint flat config for TypeScript projects.
 Includes:
 
 - ESLint recommended rules
-- [typescript-eslint](https://typescript-eslint.io/) recommended rules with type-aware linting via `projectService`
-- Stylistic rules (trailing commas, semicolons, 2-space indent, etc.)
+- [typescript-eslint](https://typescript-eslint.io/) strict type-checked and stylistic type-checked rules via `projectService`
+- Stylistic rules (quotes, trailing commas, semicolons, 2-space indent, etc.)
+- Consistent type imports (`import type`)
 
 ## Installation
 
 ```bash
-npm install -D @abelspithost/eslint-config-ts-ts eslint jiti typescript
+npm install -D @abelspithost/eslint-config-ts eslint typescript jiti
 ```
 
 ## Usage
