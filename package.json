@@ -1,0 +1,36 @@
+{
+  "name": "@abelspithost/eslint-config-ts",
+  "version": "0.0.0",
+  "description": "",
+  "author": "Abel Spithost",
+  "license": "ISC",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "npm run clean && npm run typecheck && tsc -p tsconfig.json",
+    "clean": "rimraf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@eslint/js": "^9.39.2",
+    "@stylistic/eslint-plugin": "^5.7.1",
+    "globals": "^17.3.0",
+    "typescript-eslint": "^8.54.0"
+  },
+  "devDependencies": {
+    "@abelspithost/tsconfig-node": "^0.0.2",
+    "@types/node": "^24.10.11",
+    "rimraf": "^6.1.2",
+    "typescript": "^5.9.3"
+  },
+  "peerDependencies": {
+    "eslint": ">=9.0.0"
+  }
+}
