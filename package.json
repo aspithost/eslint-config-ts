@@ -2,8 +2,15 @@
   "name": "@abelspithost/eslint-config-ts",
   "version": "0.0.0",
   "description": "ESLint configuration preset",
-  "author": "Abel Spithost",
+  "author": {
+    "name": "Abel Spithost",
+    "url": "https://github.com/aspithost"
+  },
   "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aspithost/eslint-config-ts.git"
+  },
   "type": "module",
   "exports": {
     ".": {
@@ -15,9 +22,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "npm run clean && npm run typecheck && tsc -p tsconfig.json",
-    "clean": "rimraf dist",
-    "typecheck": "tsc --noEmit"
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
@@ -32,6 +38,7 @@
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "eslint": ">=9.0.0"
+    "eslint": ">=9.0.0",
+    "typescript": ">=5.0.0"
   }
 }
