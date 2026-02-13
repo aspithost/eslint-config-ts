@@ -15,7 +15,8 @@ export function createConfig({
     {
       extends: [
         eslint.configs.recommended,
-        tseslint.configs.recommended,
+        tseslint.configs.strictTypeChecked,
+        tseslint.configs.stylisticTypeChecked,
       ],
       files,
       ignores,
@@ -39,7 +40,12 @@ export function createConfig({
         '@stylistic/eol-last': 'error',
         '@stylistic/indent': ['error', 2, { 'SwitchCase': 1 }],
         '@stylistic/no-trailing-spaces': 'error',
+        '@stylistic/quotes': ['error', 'single'],
         '@stylistic/semi': 'error',
+        '@typescript-eslint/consistent-type-imports': ['error', {
+          prefer: 'type-imports',
+          fixStyle: 'separate-type-imports',
+        }],
         '@typescript-eslint/no-unused-vars': ['error', {
           varsIgnorePattern: '^_',
           argsIgnorePattern: '^_',

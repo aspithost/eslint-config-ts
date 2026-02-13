@@ -1,6 +1,6 @@
 {
   "name": "@abelspithost/eslint-config-ts",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "ESLint configuration preset",
   "author": {
     "name": "Abel Spithost",
@@ -23,7 +23,8 @@
   ],
   "scripts": {
     "build": "npm run clean && tsc -p tsconfig.json",
-    "clean": "rimraf dist"
+    "clean": "rimraf dist",
+    "lint": "eslint ."
   },
   "dependencies": {
     "@eslint/js": "^9.39.2",
@@ -34,6 +35,8 @@
   "devDependencies": {
     "@abelspithost/tsconfig-node": "^0.0.3",
     "@types/node": "^24.10.11",
+    "eslint": "^9.39.2",
+    "jiti": "^2.6.1",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3"
   },
