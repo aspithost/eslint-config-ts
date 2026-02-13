@@ -1,7 +1,7 @@
 {
   "name": "@abelspithost/eslint-config-ts",
   "version": "0.0.0",
-  "description": "",
+  "description": "ESLint configuration preset",
   "author": "Abel Spithost",
   "license": "ISC",
   "exports": {
@@ -25,7 +25,7 @@
     "typescript-eslint": "^8.54.0"
   },
   "devDependencies": {
-    "@abelspithost/tsconfig-node": "^0.0.2",
+    "@abelspithost/tsconfig-node": "^0.0.3",
     "@types/node": "^24.10.11",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3"
