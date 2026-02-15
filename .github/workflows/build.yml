@@ -1,6 +1,13 @@
 name: Build
 
-on: [workflow_call, workflow_dispatch]
+on:
+  workflow_call:
+    inputs:
+      upload-artifact:
+        description: Upload the dist folder as an artifact
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   build:
@@ -24,3 +31,11 @@ jobs:
 
       - name: Build
         run: npm run build
+
+      - name: Upload dist
+        if: inputs.upload-artifact
+        uses: actions/upload-artifact@v5
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
