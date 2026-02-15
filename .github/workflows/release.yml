@@ -9,7 +9,9 @@ permissions:
 jobs:
   build:
     uses: ./.github/workflows/build.yml
-  
+    with:
+      upload-artifact: true
+
   release:
     needs: build
     uses: aspithost/actions/.github/workflows/release.yml@v0
@@ -18,3 +20,4 @@ jobs:
       id-token: write
     with:
       package-path: '.'
+      artifact-name: dist
