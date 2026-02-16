@@ -1,4 +1,4 @@
-import { defineConfig } from 'eslint/config';
+import { defineConfig, type Config } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import eslint from '@eslint/js';
@@ -10,7 +10,7 @@ export function createConfig({
 }: {
   files?: string[];
   ignores?: string[];
-} = {}) {
+} = {}): Config[] {
   return defineConfig([
     {
       extends: [
