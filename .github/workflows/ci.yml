@@ -8,4 +8,4 @@ on:
 
 jobs:
   build:
-    uses: ./.github/workflows/build.yml
+    uses: aspithost/actions/.github/workflows/build-ts.yml@v0
