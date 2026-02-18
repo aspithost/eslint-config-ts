@@ -26,24 +26,28 @@
     "build": "npm run clean && tsc -p tsconfig.build.json",
     "clean": "rimraf dist",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
-    "@eslint/js": "^9.39.2",
-    "@stylistic/eslint-plugin": "^5.7.1",
+    "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.8.0",
     "globals": "^17.3.0",
-    "typescript-eslint": "^8.54.0"
+    "typescript-eslint": "^8.56.0"
   },
   "devDependencies": {
+    "@abelspithost/commitlint": "^0.0.2",
     "@abelspithost/tsconfig-node": "^0.0.3",
+    "@commitlint/cli": "^20.4.1",
     "@types/node": "^24.10.11",
-    "eslint": "^9.39.2",
+    "eslint": "^10.0.0",
+    "husky": "^9.1.7",
     "jiti": "^2.6.1",
     "rimraf": "^6.1.2",
     "typescript": "^5.9.3"
   },
   "peerDependencies": {
-    "eslint": ">=9.0.0",
+    "eslint": ">=10.0.0",
     "typescript": ">=5.0.0"
   }
 }
