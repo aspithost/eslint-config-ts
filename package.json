@@ -1,6 +1,6 @@
 {
   "name": "@abelspithost/eslint-config-ts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "ESLint configuration preset",
   "homepage": "https://github.com/aspithost/eslint-config-ts#readme",
   "author": {
@@ -27,7 +27,7 @@
     "clean": "rimraf dist",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky || true"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
