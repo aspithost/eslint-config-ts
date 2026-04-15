@@ -1,6 +1,6 @@
 {
   "name": "@abelspithost/eslint-config-ts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "ESLint configuration preset",
   "homepage": "https://github.com/aspithost/eslint-config-ts#readme",
   "author": {
@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
+    "@stylistic/eslint-plugin": "^5.10.0",
     "globals": "^17.5.0",
     "typescript-eslint": "^8.58.2"
   },
@@ -38,7 +39,6 @@
     "@abelspithost/commitlint": "^0.0.2",
     "@abelspithost/tsconfig-node": "^0.0.5",
     "@commitlint/cli": "^20.5.0",
-    "@stylistic/eslint-plugin": "^5.10.0",
     "@types/node": "^24.12.2",
     "eslint": "^10.2.0",
     "husky": "^9.1.7",
