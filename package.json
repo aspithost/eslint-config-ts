@@ -1,6 +1,6 @@
 {
   "name": "@abelspithost/eslint-config-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "ESLint configuration preset",
   "homepage": "https://github.com/aspithost/eslint-config-ts#readme",
   "author": {
