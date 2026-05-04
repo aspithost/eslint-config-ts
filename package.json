@@ -23,7 +23,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "npm run clean && tsc -p tsconfig.build.json",
+    "build": "npm run clean && npm run typecheck && tsc -p tsconfig.build.json",
     "clean": "rimraf dist",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
