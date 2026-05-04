@@ -43,7 +43,8 @@ export default createConfig({
 
 ### Defaults
 
-| Option    | Default                            |
-| --------- | ---------------------------------- |
-| `files`   | `['src/**/*.{js,ts}']`            |
-| `ignores` | `['dist/**', 'node_modules/**']`  |
+| Option          | Default                            |
+| --------------- | ---------------------------------- |
+| `files`         | `['src/**/*.{js,ts}']`             |
+| `globalIgnores` | `[dist/**", "node_modules/**"]`    |
+| `ignores`       | `[]`                               |
