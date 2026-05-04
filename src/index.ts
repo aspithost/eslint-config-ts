@@ -1,4 +1,4 @@
-import { defineConfig, type Config } from 'eslint/config';
+import { defineConfig, globalIgnores as _globalIgnores, type Config } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import eslint from '@eslint/js';
@@ -8,6 +8,8 @@ import stylistic from '@stylistic/eslint-plugin';
 export interface CreateConfigOptions {
   /** Glob patterns for files to lint. */
   files?: string[];
+  /** Glob patterns for files to ignore. */
+  globalIgnores?: string[];
   /** Glob patterns for files to ignore. */
   ignores?: string[];
 }
@@ -21,9 +23,11 @@ export interface CreateConfigOptions {
  */
 export function createConfig({
   files = ['src/**/*.{js,ts}'],
-  ignores = ['dist/**', 'node_modules/**'],
+  globalIgnores = ['dist/**', 'node_modules/**'],
+  ignores = [],
 }: CreateConfigOptions = {}): Config[] {
   return defineConfig([
+    _globalIgnores(globalIgnores),
     {
       extends: [
         eslint.configs.recommended,
