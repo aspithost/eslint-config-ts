@@ -36,7 +36,7 @@
     "typescript-eslint": "^8.58.2"
   },
   "devDependencies": {
-    "@abelspithost/commitlint": "^0.0.2",
+    "@abelspithost/commitlint": "^0.0.3",
     "@abelspithost/tsconfig-node": "^0.0.5",
     "@commitlint/cli": "^20.5.0",
     "@types/node": "^24.12.2",

@@ -36,7 +36,8 @@ import { createConfig } from '@abelspithost/eslint-config-ts';
 
 export default createConfig({
   files: ['src/**/*.ts', 'lib/**/*.ts'],
-  ignores: ['dist/**', 'build/**'],
+  globalIgnores: ["dist/**", "node_modules/**"]
+  ignores: [],
 });
 ```
 
