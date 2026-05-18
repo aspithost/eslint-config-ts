@@ -1,5 +1,8 @@
 # @abelspithost/eslint-config-ts
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aspithost_eslint-config-ts&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=aspithost_eslint-config-ts)
+![NPM Version](https://img.shields.io/npm/v/@abelspithost/eslint-config-ts)
+
 A shared ESLint flat config for TypeScript projects.
 
 Includes:
