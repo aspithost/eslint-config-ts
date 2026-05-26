@@ -7,13 +7,8 @@ on:
 jobs:
   build:
     uses: aspithost/actions/.github/workflows/build-node.yml@v1
-    permissions:
-      contents: read
     with:
-      run-sonar: true
       upload-artifact: true
-    secrets:
-      sonar-token: ${{ secrets.SONAR_TOKEN }}
 
   release:
     needs: build
