@@ -1,3 +1,4 @@
 {
-  "extends": "@abelspithost/tsconfig-node"
+  "extends": "@abelspithost/tsconfig-node",
+  "exclude": ["dist"],
 }
