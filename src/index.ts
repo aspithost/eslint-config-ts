@@ -1,8 +1,8 @@
-import { defineConfig, globalIgnores as _globalIgnores, type Config } from 'eslint/config';
-import globals from 'globals';
-import tseslint from 'typescript-eslint';
 import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
+import { globalIgnores as _globalIgnores, defineConfig, type Config } from 'eslint/config';
+import globals from 'globals';
+import tseslint from 'typescript-eslint';
 
 /** Options for {@link createConfig}. */
 export interface CreateConfigOptions {
@@ -22,8 +22,8 @@ export interface CreateConfigOptions {
  * @returns An ESLint flat config array.
  */
 export function createConfig({
-  files = ['src/**/*.{js,ts}'],
-  globalIgnores = ['dist/**', 'node_modules/**'],
+  files = ['src/**/*.{js,ts,tsx}'],
+  globalIgnores = ['dist/**', 'lib/**', 'node_modules/**'],
   ignores = [],
 }: CreateConfigOptions = {}): Config[] {
   return defineConfig([
