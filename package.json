@@ -45,15 +45,15 @@
   "dependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "globals": "^17.11.0",
-    "typescript-eslint": "^8.67.0"
+    "globals": "^17.12.0",
+    "typescript-eslint": "^8.70.0"
   },
   "devDependencies": {
-    "@abelspithost/commitlint": "^0.1.6",
+    "@abelspithost/commitlint": "^0.1.7",
     "@abelspithost/tsconfig-node": "^0.1.1",
     "@commitlint/cli": "^21.2.2",
-    "@types/node": "^24.13.3",
-    "eslint": "^10.9.0",
+    "@types/node": "^24.13.4",
+    "eslint": "^10.10.0",
     "husky": "^9.1.7",
     "jiti": "^2.7.0",
     "rimraf": "^6.1.3",
