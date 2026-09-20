@@ -52,6 +52,9 @@ const DEFAULT_TS_RULES: Linter.RulesRecord = {
 
 /** Options for {@link createConfig}. */
 export interface CreateConfigOptions {
+  /** Globs for allowing the default project in TypeScript ESLint. @default [] */
+  allowDefaultProject?: string[];
+
   /** Globs for TS files (strict, type-checked). @default DEFAULT_FILES */
   files?: string[];
 
@@ -87,6 +90,7 @@ export interface CreateConfigOptions {
  * @param options - See {@link CreateConfigOptions}.
  */
 export function createConfig({
+  allowDefaultProject = [],
   files = DEFAULT_FILES,
   globals = DEFAULT_GLOBALS,
   globalIgnores = DEFAULT_GLOBAL_IGNORES,
@@ -114,7 +118,9 @@ export function createConfig({
       languageOptions: {
         globals,
         parserOptions: {
-          projectService: true,
+          projectService: {
+            allowDefaultProject,
+          },
           tsconfigRootDir,
         },
       },
