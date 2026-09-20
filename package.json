@@ -1,6 +1,6 @@
 {
   "name": "@abelspithost/eslint-config-ts",
-  "version": "1.1.5",
+  "version": "2.0.0",
   "description": "ESLint configuration preset",
   "keywords": [
     "eslint",
@@ -53,7 +53,7 @@
     "@abelspithost/tsconfig-node": "^0.1.1",
     "@commitlint/cli": "^21.2.2",
     "@types/node": "^24.13.5",
-    "eslint": "^10.10.0",
+    "eslint": "^10.11.0",
     "husky": "^9.1.7",
     "jiti": "^2.7.0",
     "rimraf": "^6.1.3",
