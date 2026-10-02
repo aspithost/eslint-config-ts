@@ -27,6 +27,7 @@ const DEFAULT_JS_RULES: Linter.RulesRecord = {
 const DEFAULT_STYLISTIC_RULES: Linter.RulesRecord = {
   '@stylistic/comma-dangle': ['error', 'always-multiline'],
   '@stylistic/eol-last': 'error',
+  '@stylistic/max-len': ['error', { code: 100 }],
   '@stylistic/indent': ['error', 2, { 'SwitchCase': 1 }],
   '@stylistic/member-delimiter-style': ['error', {
     multiline: { delimiter: 'semi', requireLast: true },
@@ -67,7 +68,9 @@ export interface CreateConfigOptions {
   /** Globals for TS and JS files. @default DEFAULT_GLOBALS */
   globals?: Linter.Globals;
 
-  /** Globs ignored by the entire ESLint run, including later configs. @default DEFAULT_GLOBAL_IGNORES */
+  /** Globs ignored by the entire ESLint run, including later configs.
+   * @default DEFAULT_GLOBAL_IGNORES
+   * */
   globalIgnores?: string[];
 
   /** Globs skipped by this preset only; other configs still lint them. @default [] */
