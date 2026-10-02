@@ -32,7 +32,7 @@
     "node": ">=24"
   },
   "scripts": {
-    "build": "npm run clean && tsc -p tsconfig.build.json && npm run deps:check",
+    "build": "npm run clean && tsc -p tsconfig.spec.json && tsc -p tsconfig.build.json && npm run deps:check",
     "clean": "rimraf dist",
     "deps:check": "npx -y npm-check-updates --cooldown 2",
     "deps:update": "npx -y npm-check-updates -u --target minor --cooldown 2 && npm install",
@@ -40,7 +40,10 @@
     "lint": "eslint . && npm run publint",
     "prepare": "husky || true",
     "publint": "npx -y publint",
-    "typecheck": "tsc -p tsconfig.build.json --noEmit"
+    "test:unit": "vitest",
+    "test:cov": "vitest run --coverage --coverage.reporter=text",
+    "test:cov:ci": "vitest run --coverage",
+    "typecheck": "tsc -p tsconfig.build.json --noEmit && tsc -p tsconfig.spec.json"
   },
   "dependencies": {
     "@eslint/js": "^10.0.1",
