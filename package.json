@@ -1,6 +1,6 @@
 {
   "name": "@abelspithost/eslint-config-ts",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "ESLint configuration preset",
   "keywords": [
     "eslint",
