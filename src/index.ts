@@ -28,6 +28,11 @@ const DEFAULT_STYLISTIC_RULES: Linter.RulesRecord = {
   '@stylistic/comma-dangle': ['error', 'always-multiline'],
   '@stylistic/eol-last': 'error',
   '@stylistic/indent': ['error', 2, { 'SwitchCase': 1 }],
+  '@stylistic/member-delimiter-style': ['error', {
+    multiline: { delimiter: 'semi', requireLast: true },
+    multilineDetection: 'brackets',
+    singleline: { delimiter: 'semi', requireLast: false },
+  }],
   '@stylistic/no-multi-spaces': 'error',
   '@stylistic/no-multiple-empty-lines': ['error', {
     max: 1,
