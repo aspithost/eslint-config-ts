@@ -36,6 +36,7 @@ const DEFAULT_STYLISTIC_RULES: Linter.RulesRecord = {
   '@stylistic/no-multi-spaces': 'error',
   '@stylistic/no-multiple-empty-lines': ['error', {
     max: 1,
+    maxEOF: 0,
   }],
   '@stylistic/no-trailing-spaces': 'error',
   '@stylistic/no-whitespace-before-property': 'error',
