@@ -13,5 +13,6 @@ jobs:
       pull-requests: write
     with:
       run-sonar: true
+      test-command: npm run test:cov:ci
     secrets:
       sonar-token: ${{ secrets.SONAR_TOKEN }}
