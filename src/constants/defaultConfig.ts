@@ -27,10 +27,23 @@ const DEFAULT_RULES_IMPORT_X: Linter.RulesRecord = {
 };
 
 export const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
+  '@stylistic/array-bracket-newline': ['error', { minItems: 3 }],
+  '@stylistic/array-element-newline': ['error', {
+    consistent: true,
+    minItems: 3,
+  }],
   '@stylistic/comma-dangle': ['error', 'always-multiline'],
+  '@stylistic/comma-spacing': ['error', {
+    before: false,
+    after: true,
+  }],
   '@stylistic/eol-last': 'error',
   '@stylistic/max-len': ['error', { code: 100 }],
-  '@stylistic/indent': ['error', 2, { 'SwitchCase': 1 }],
+  '@stylistic/indent': [
+    'error',
+    2,
+    { 'SwitchCase': 1 },
+  ],
   '@stylistic/member-delimiter-style': ['error', {
     multiline: {
       delimiter: 'semi',
@@ -90,7 +103,8 @@ export const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
   '@stylistic/object-property-newline': ['error', {
     allowAllPropertiesOnSameLine: false,
   }],
-  '@stylistic/quotes': ['error', 'single'],
+  '@stylistic/quotes': ['error',
+    'single'],
   '@stylistic/semi': ['error', 'always'],
 };
 
