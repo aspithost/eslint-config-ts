@@ -100,9 +100,7 @@ export const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
       consistent: true,
     },
   }],
-  '@stylistic/object-property-newline': ['error', {
-    allowAllPropertiesOnSameLine: false,
-  }],
+  '@stylistic/object-property-newline': 'error',
   '@stylistic/quotes': ['error',
     'single'],
   '@stylistic/semi': ['error', 'always'],
