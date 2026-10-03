@@ -3,59 +3,17 @@ import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import type { Linter } from 'eslint';
 import { globalIgnores as _globalIgnores, defineConfig, type Config } from 'eslint/config';
-import _globals from 'globals';
 import tseslint from 'typescript-eslint';
 
-const DEFAULT_GLOBALS: Linter.Globals = _globals.node;
-
-const DEFAULT_GLOBAL_IGNORES = [
-  '**/build/**',
-  '**/coverage/**',
-  '**/dist/**',
-];
-
-const DEFAULT_FILES_JS = ['**/*.{js,mjs,cjs,jsx}'];
-const DEFAULT_FILE_TS = ['**/*.{ts,mts,cts,tsx}'];
-
-const DEFAULT_JS_RULES: Linter.RulesRecord = {
-  'no-unused-vars': ['error', {
-    varsIgnorePattern: '^_',
-    argsIgnorePattern: '^_',
-  }],
-};
-
-const DEFAULT_STYLISTIC_RULES: Linter.RulesRecord = {
-  '@stylistic/comma-dangle': ['error', 'always-multiline'],
-  '@stylistic/eol-last': 'error',
-  '@stylistic/max-len': ['error', { code: 100 }],
-  '@stylistic/indent': ['error', 2, { 'SwitchCase': 1 }],
-  '@stylistic/member-delimiter-style': ['error', {
-    multiline: { delimiter: 'semi', requireLast: true },
-    multilineDetection: 'brackets',
-    singleline: { delimiter: 'semi', requireLast: false },
-  }],
-  '@stylistic/no-multi-spaces': 'error',
-  '@stylistic/no-multiple-empty-lines': ['error', {
-    max: 1,
-    maxEOF: 0,
-  }],
-  '@stylistic/no-trailing-spaces': 'error',
-  '@stylistic/no-whitespace-before-property': 'error',
-  '@stylistic/object-curly-spacing': ['error', 'always'],
-  '@stylistic/quotes': ['error', 'single'],
-  '@stylistic/semi': ['error', 'always'],
-};
-
-const DEFAULT_TS_RULES: Linter.RulesRecord = {
-  '@typescript-eslint/consistent-type-imports': ['error', {
-    prefer: 'type-imports',
-    fixStyle: 'separate-type-imports',
-  }],
-  '@typescript-eslint/no-unused-vars': ['error', {
-    varsIgnorePattern: '^_',
-    argsIgnorePattern: '^_',
-  }],
-};
+import {
+  DEFAULT_FILES_JS,
+  DEFAULT_FILES_TS,
+  DEFAULT_GLOBAL_IGNORES,
+  DEFAULT_GLOBALS,
+  DEFAULT_RULES_JS,
+  DEFAULT_RULES_TS,
+  DEFAULT_RULES_STYLISTIC,
+} from '../constants/defaultConfig.js';
 
 /** Options for {@link createConfig}. */
 export interface CreateConfigOptions {
@@ -85,13 +43,13 @@ export interface CreateConfigOptions {
   /** Extra plugins for TS files. Merged after the default plugins. */
   pluginsTs?: Record<string, Plugin>;
 
-  /** Extra rules for JS files, merged after `stylisticRules`. @default DEFAULT_JS_RULES */
+  /** Extra rules for JS files, merged after `stylisticRules`. @default DEFAULT_RULES_JS */
   rulesJs?: Linter.RulesRecord;
 
-  /** Extra rules for TS files, merged after `stylisticRules`. @default DEFAULT_TS_RULES */
+  /** Extra rules for TS files, merged after `stylisticRules`. @default DEFAULT_RULES_TS */
   rulesTs?: Linter.RulesRecord;
 
-  /** Stylistic rules for TS and JS files. @default DEFAULT_STYLISTIC_RULES */
+  /** Stylistic rules for TS and JS files. @default DEFAULT_RULES_STYLISTIC */
   stylisticRules?: Linter.RulesRecord;
 
   /** Root for resolving `tsconfig.json`; usually `import.meta.dirname`. */
@@ -106,16 +64,16 @@ export interface CreateConfigOptions {
  */
 export function createConfig({
   allowDefaultProject = [],
-  filesTs = DEFAULT_FILE_TS,
   filesJs = DEFAULT_FILES_JS,
+  filesTs = DEFAULT_FILES_TS,
   globals = DEFAULT_GLOBALS,
   globalIgnores = DEFAULT_GLOBAL_IGNORES,
   ignores = [],
   pluginsJs,
   pluginsTs,
-  rulesJs = DEFAULT_JS_RULES,
-  rulesTs = DEFAULT_TS_RULES,
-  stylisticRules = DEFAULT_STYLISTIC_RULES,
+  rulesJs = DEFAULT_RULES_JS,
+  rulesTs = DEFAULT_RULES_TS,
+  stylisticRules = DEFAULT_RULES_STYLISTIC,
   tsconfigRootDir,
 }: CreateConfigOptions = {}): Config[] {
   return defineConfig([
