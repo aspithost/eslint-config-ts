@@ -1,18 +1,20 @@
 import type { Plugin } from '@eslint/core';
 import eslint from '@eslint/js';
-import stylistic from '@stylistic/eslint-plugin';
 import type { Linter } from 'eslint';
-import { globalIgnores as _globalIgnores, defineConfig, type Config } from 'eslint/config';
+import {
+  type Config, globalIgnores as _globalIgnores, defineConfig,
+} from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
 import {
   DEFAULT_FILES_JS,
   DEFAULT_FILES_TS,
-  DEFAULT_GLOBAL_IGNORES,
   DEFAULT_GLOBALS,
+  DEFAULT_GLOBAL_IGNORES,
+  DEFAULT_PLUGINS_JS,
+  DEFAULT_PLUGINS_TS,
   DEFAULT_RULES_JS,
   DEFAULT_RULES_TS,
-  DEFAULT_RULES_STYLISTIC,
 } from '../constants/defaultConfig.js';
 
 /** Options for {@link createConfig}. */
@@ -37,16 +39,16 @@ export interface CreateConfigOptions {
   /** Globs skipped by this preset only; other configs still lint them. @default [] */
   ignores?: string[];
 
-  /** Extra plugins for JS files. Merged after the default plugins. */
+  /** Plugins for JS files. */
   pluginsJs?: Record<string, Plugin>;
 
-  /** Extra plugins for TS files. Merged after the default plugins. */
+  /** Plugins for TS files. */
   pluginsTs?: Record<string, Plugin>;
 
-  /** Extra rules for JS files, merged after `stylisticRules`. @default DEFAULT_RULES_JS */
+  /** Extra rules for JS files, includes stylistic rules by default`. @default DEFAULT_RULES_JS */
   rulesJs?: Linter.RulesRecord;
 
-  /** Extra rules for TS files, merged after `stylisticRules`. @default DEFAULT_RULES_TS */
+  /** Extra rules for TS files, includes stylistic rules by default`. @default DEFAULT_RULES_TS */
   rulesTs?: Linter.RulesRecord;
 
   /** Stylistic rules for TS and JS files. @default DEFAULT_RULES_STYLISTIC */
@@ -69,11 +71,10 @@ export function createConfig({
   globals = DEFAULT_GLOBALS,
   globalIgnores = DEFAULT_GLOBAL_IGNORES,
   ignores = [],
-  pluginsJs,
-  pluginsTs,
+  pluginsJs = DEFAULT_PLUGINS_JS,
+  pluginsTs = DEFAULT_PLUGINS_TS,
   rulesJs = DEFAULT_RULES_JS,
   rulesTs = DEFAULT_RULES_TS,
-  stylisticRules = DEFAULT_RULES_STYLISTIC,
   tsconfigRootDir,
 }: CreateConfigOptions = {}): Config[] {
   return defineConfig([
@@ -87,10 +88,7 @@ export function createConfig({
       ],
       files: filesTs,
       ignores,
-      plugins: {
-        '@stylistic': stylistic,
-        ...pluginsTs,
-      },
+      plugins: pluginsTs,
       languageOptions: {
         globals,
         parserOptions: {
@@ -100,25 +98,16 @@ export function createConfig({
           tsconfigRootDir,
         },
       },
-      rules: {
-        ...stylisticRules,
-        ...rulesTs,
-      },
+      rules: rulesTs,
     },
     {
       name: 'preset/js',
       extends: [eslint.configs.recommended],
       files: filesJs,
       ignores,
-      plugins: {
-        '@stylistic': stylistic,
-        ...pluginsJs,
-      },
+      plugins: pluginsJs,
       languageOptions: { globals },
-      rules: {
-        ...stylisticRules,
-        ...rulesJs,
-      },
+      rules: rulesJs,
     },
   ]);
 }
