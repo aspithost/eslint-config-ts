@@ -14,15 +14,17 @@ describe('createConfig', () => {
   it('should accept user provided parameters', () => {
     const config = createConfig({
       allowDefaultProject: ['*.config.ts'],
-      files: ['src/**/*.ts'],
+      filesJs: ['src/**/*.js'],
+      filesTs: ['src/**/*.ts'],
       globals: { myGlobal: 'readonly' },
       globalIgnores: ['**/out/**'],
       ignores: ['**/legacy/**'],
-      jsFiles: ['scripts/**/*.js'],
-      jsRules: { 'no-console': 'warn' },
+      pluginsJs: { 'my-js-plugin': {} },
+      pluginsTs: { 'my-ts-plugin': {} },
+      rulesJs: { 'no-console': 'warn' },
+      rulesTs: { '@typescript-eslint/no-unused-vars': 'warn' },
       stylisticRules: { '@stylistic/semi': ['error', 'never'] },
       tsconfigRootDir: '/tmp',
-      tsRules: { '@typescript-eslint/no-explicit-any': 'off' },
     });
 
     expect(config.length).toBeGreaterThan(0);
