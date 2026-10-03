@@ -1,5 +1,8 @@
 import type { Linter } from 'eslint';
+import type { Plugin } from '@eslint/core';
 import _globals from 'globals';
+import stylistic from '@stylistic/eslint-plugin';
+import { importX } from 'eslint-plugin-import-x';
 
 export const DEFAULT_FILES_JS = ['**/*.{js,mjs,cjs,jsx}'];
 export const DEFAULT_FILES_TS = ['**/*.{ts,mts,cts,tsx}'];
@@ -10,6 +13,20 @@ export const DEFAULT_GLOBAL_IGNORES = [
   '**/coverage/**',
   '**/dist/**',
 ];
+
+const DEFAULT_RULES_ESLINT: Linter.RulesRecord = {
+  'sort-imports': ['error', {
+    'ignoreDeclarationSort': true,
+  }],
+};
+
+const DEFAULT_RULES_IMPORT_X: Linter.RulesRecord = {
+  'import-x/order': ['error', {
+    // groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index'], 'type'],
+    'newlines-between': 'always',
+    // alphabetize: { order: 'asc', caseInsensitive: true },
+  }],
+};
 
 export const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
   '@stylistic/comma-dangle': ['error', 'always-multiline'],
@@ -33,7 +50,14 @@ export const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
   '@stylistic/semi': ['error', 'always'],
 };
 
+const DEFAULT_RULES: Linter.RulesRecord = {
+  ...DEFAULT_RULES_ESLINT,
+  ...DEFAULT_RULES_IMPORT_X,
+  ...DEFAULT_RULES_STYLISTIC,
+};
+
 export const DEFAULT_RULES_JS: Linter.RulesRecord = {
+  ...DEFAULT_RULES,
   'no-unused-vars': ['error', {
     varsIgnorePattern: '^_',
     argsIgnorePattern: '^_',
@@ -41,6 +65,7 @@ export const DEFAULT_RULES_JS: Linter.RulesRecord = {
 };
 
 export const DEFAULT_RULES_TS: Linter.RulesRecord = {
+  ...DEFAULT_RULES,
   '@typescript-eslint/consistent-type-imports': ['error', {
     prefer: 'type-imports',
     fixStyle: 'separate-type-imports',
@@ -49,4 +74,19 @@ export const DEFAULT_RULES_TS: Linter.RulesRecord = {
     varsIgnorePattern: '^_',
     argsIgnorePattern: '^_',
   }],
+};
+
+const PLUGIN_IMPORT_X: Record<string, Plugin> = {
+  'import-x': importX,
+};
+const PLUGIN_STYLISTIC: Record<string, Plugin> = {
+  '@stylistic': stylistic,
+};
+export const DEFAULT_PLUGINS_JS: Record<string, Plugin> = {
+  ...PLUGIN_STYLISTIC,
+  ...PLUGIN_IMPORT_X,
+};
+export const DEFAULT_PLUGINS_TS: Record<string, Plugin> = {
+  ...PLUGIN_STYLISTIC,
+  ...PLUGIN_IMPORT_X,
 };
