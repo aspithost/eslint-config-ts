@@ -1,11 +1,10 @@
+import type { Plugin } from '@eslint/core';
 import eslint from '@eslint/js';
 import stylistic from '@stylistic/eslint-plugin';
 import type { Linter } from 'eslint';
 import { globalIgnores as _globalIgnores, defineConfig, type Config } from 'eslint/config';
 import _globals from 'globals';
 import tseslint from 'typescript-eslint';
-
-const DEFAULT_FILES = ['**/*.{ts,mts,cts,tsx}'];
 
 const DEFAULT_GLOBALS: Linter.Globals = _globals.node;
 
@@ -15,7 +14,8 @@ const DEFAULT_GLOBAL_IGNORES = [
   '**/dist/**',
 ];
 
-const DEFAULT_JS_FILES = ['**/*.{js,mjs,cjs,jsx}'];
+const DEFAULT_FILES_JS = ['**/*.{js,mjs,cjs,jsx}'];
+const DEFAULT_FILE_TS = ['**/*.{ts,mts,cts,tsx}'];
 
 const DEFAULT_JS_RULES: Linter.RulesRecord = {
   'no-unused-vars': ['error', {
@@ -62,8 +62,11 @@ export interface CreateConfigOptions {
   /** Globs for allowing the default project in TypeScript ESLint. @default [] */
   allowDefaultProject?: string[];
 
+  /** Globs for JS files (non-type-checked). @default DEFAULT_JS_FILES */
+  filesJs?: string[];
+
   /** Globs for TS files (strict, type-checked). @default DEFAULT_FILES */
-  files?: string[];
+  filesTs?: string[];
 
   /** Globals for TS and JS files. @default DEFAULT_GLOBALS */
   globals?: Linter.Globals;
@@ -76,20 +79,23 @@ export interface CreateConfigOptions {
   /** Globs skipped by this preset only; other configs still lint them. @default [] */
   ignores?: string[];
 
-  /** Extra rules for JS files, merged after `stylisticRules`. @default DEFAULT_JS_RULES */
-  jsRules?: Linter.RulesRecord;
+  /** Extra plugins for JS files. Merged after the default plugins. */
+  pluginsJs?: Record<string, Plugin>;
 
-  /** Globs for JS files (non-type-checked). @default DEFAULT_JS_FILES */
-  jsFiles?: string[];
+  /** Extra plugins for TS files. Merged after the default plugins. */
+  pluginsTs?: Record<string, Plugin>;
+
+  /** Extra rules for JS files, merged after `stylisticRules`. @default DEFAULT_JS_RULES */
+  rulesJs?: Linter.RulesRecord;
+
+  /** Extra rules for TS files, merged after `stylisticRules`. @default DEFAULT_TS_RULES */
+  rulesTs?: Linter.RulesRecord;
 
   /** Stylistic rules for TS and JS files. @default DEFAULT_STYLISTIC_RULES */
   stylisticRules?: Linter.RulesRecord;
 
   /** Root for resolving `tsconfig.json`; usually `import.meta.dirname`. */
   tsconfigRootDir?: string;
-
-  /** Extra rules for TS files, merged after `stylisticRules`. @default DEFAULT_TS_RULES */
-  tsRules?: Linter.RulesRecord;
 }
 
 /**
@@ -100,18 +106,18 @@ export interface CreateConfigOptions {
  */
 export function createConfig({
   allowDefaultProject = [],
-  files = DEFAULT_FILES,
+  filesTs = DEFAULT_FILE_TS,
+  filesJs = DEFAULT_FILES_JS,
   globals = DEFAULT_GLOBALS,
   globalIgnores = DEFAULT_GLOBAL_IGNORES,
   ignores = [],
-  jsFiles = DEFAULT_JS_FILES,
-  jsRules = DEFAULT_JS_RULES,
+  pluginsJs,
+  pluginsTs,
+  rulesJs = DEFAULT_JS_RULES,
+  rulesTs = DEFAULT_TS_RULES,
   stylisticRules = DEFAULT_STYLISTIC_RULES,
   tsconfigRootDir,
-  tsRules = DEFAULT_TS_RULES,
 }: CreateConfigOptions = {}): Config[] {
-  const plugins = { '@stylistic': stylistic };
-
   return defineConfig([
     _globalIgnores(globalIgnores),
     {
@@ -121,9 +127,12 @@ export function createConfig({
         tseslint.configs.strictTypeChecked,
         tseslint.configs.stylisticTypeChecked,
       ],
-      files,
+      files: filesTs,
       ignores,
-      plugins,
+      plugins: {
+        '@stylistic': stylistic,
+        ...pluginsTs,
+      },
       languageOptions: {
         globals,
         parserOptions: {
@@ -135,19 +144,22 @@ export function createConfig({
       },
       rules: {
         ...stylisticRules,
-        ...tsRules,
+        ...rulesTs,
       },
     },
     {
       name: 'preset/js',
       extends: [eslint.configs.recommended],
-      files: jsFiles,
+      files: filesJs,
       ignores,
-      plugins,
+      plugins: {
+        '@stylistic': stylistic,
+        ...pluginsJs,
+      },
       languageOptions: { globals },
       rules: {
         ...stylisticRules,
-        ...jsRules,
+        ...rulesJs,
       },
     },
   ]);
