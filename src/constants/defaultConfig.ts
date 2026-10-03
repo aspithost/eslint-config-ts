@@ -22,9 +22,7 @@ const DEFAULT_RULES_ESLINT: Linter.RulesRecord = {
 
 const DEFAULT_RULES_IMPORT_X: Linter.RulesRecord = {
   'import-x/order': ['error', {
-    // groups: ['builtin', 'external', 'internal', ['parent', 'sibling', 'index'], 'type'],
     'newlines-between': 'always',
-    // alphabetize: { order: 'asc', caseInsensitive: true },
   }],
 };
 
@@ -34,9 +32,15 @@ export const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
   '@stylistic/max-len': ['error', { code: 100 }],
   '@stylistic/indent': ['error', 2, { 'SwitchCase': 1 }],
   '@stylistic/member-delimiter-style': ['error', {
-    multiline: { delimiter: 'semi', requireLast: true },
+    multiline: {
+      delimiter: 'semi',
+      requireLast: true,
+    },
     multilineDetection: 'brackets',
-    singleline: { delimiter: 'semi', requireLast: false },
+    singleline: {
+      delimiter: 'semi',
+      requireLast: false,
+    },
   }],
   '@stylistic/no-multi-spaces': 'error',
   '@stylistic/no-multiple-empty-lines': ['error', {
@@ -46,6 +50,46 @@ export const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
   '@stylistic/no-trailing-spaces': 'error',
   '@stylistic/no-whitespace-before-property': 'error',
   '@stylistic/object-curly-spacing': ['error', 'always'],
+  '@stylistic/object-curly-newline': ['error', {
+    ExportDeclaration: {
+      minProperties: 3,
+      multiline: true,
+      consistent: true,
+    },
+    ImportDeclaration: {
+      minProperties: 3,
+      multiline: true,
+      consistent: true,
+    },
+    ObjectExpression: {
+      minProperties: 3,
+      multiline: true,
+      consistent: true,
+    },
+    ObjectPattern: {
+      minProperties: 3,
+      multiline: true,
+      consistent: true,
+    },
+    TSEnumBody: {
+      minProperties: 3,
+      multiline: true,
+      consistent: true,
+    },
+    TSInterfaceBody: {
+      minProperties: 3,
+      multiline: true,
+      consistent: true,
+    },
+    TSTypeLiteral: {
+      minProperties: 3,
+      multiline: true,
+      consistent: true,
+    },
+  }],
+  '@stylistic/object-property-newline': ['error', {
+    allowAllPropertiesOnSameLine: false,
+  }],
   '@stylistic/quotes': ['error', 'single'],
   '@stylistic/semi': ['error', 'always'],
 };

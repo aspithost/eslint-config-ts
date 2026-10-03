@@ -1,7 +1,9 @@
 import type { Plugin } from '@eslint/core';
 import eslint from '@eslint/js';
 import type { Linter } from 'eslint';
-import { type Config, globalIgnores as _globalIgnores, defineConfig } from 'eslint/config';
+import {
+  type Config, globalIgnores as _globalIgnores, defineConfig,
+} from 'eslint/config';
 import tseslint from 'typescript-eslint';
 
 import {
