@@ -26,7 +26,7 @@ const DEFAULT_RULES_IMPORT_X: Linter.RulesRecord = {
   }],
 };
 
-export const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
+const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
   '@stylistic/array-bracket-newline': ['error', { minItems: 3 }],
   '@stylistic/array-element-newline': ['error', {
     consistent: true,
@@ -106,14 +106,13 @@ export const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
   '@stylistic/semi': ['error', 'always'],
 };
 
-const DEFAULT_RULES: Linter.RulesRecord = {
+export const DEFAULT_RULES_SHARED: Linter.RulesRecord = {
   ...DEFAULT_RULES_ESLINT,
   ...DEFAULT_RULES_IMPORT_X,
   ...DEFAULT_RULES_STYLISTIC,
 };
 
 export const DEFAULT_RULES_JS: Linter.RulesRecord = {
-  ...DEFAULT_RULES,
   'no-unused-vars': ['error', {
     varsIgnorePattern: '^_',
     argsIgnorePattern: '^_',
@@ -121,7 +120,6 @@ export const DEFAULT_RULES_JS: Linter.RulesRecord = {
 };
 
 export const DEFAULT_RULES_TS: Linter.RulesRecord = {
-  ...DEFAULT_RULES,
   '@typescript-eslint/consistent-type-imports': ['error', {
     prefer: 'type-imports',
     fixStyle: 'separate-type-imports',
