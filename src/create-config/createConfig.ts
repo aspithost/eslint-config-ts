@@ -14,18 +14,19 @@ import {
   DEFAULT_PLUGINS_JS,
   DEFAULT_PLUGINS_TS,
   DEFAULT_RULES_JS,
+  DEFAULT_RULES_SHARED,
   DEFAULT_RULES_TS,
 } from '../constants/defaultConfig.js';
 
 /** Options for {@link createConfig}. */
 export interface CreateConfigOptions {
-  /** Globs for allowing the default project in TypeScript ESLint. @default [] */
+  /** Globs passed to TypeScript ESLint's `projectService.allowDefaultProject`. @default [] */
   allowDefaultProject?: string[];
 
-  /** Globs for JS files (non-type-checked). @default DEFAULT_JS_FILES */
+  /** Globs for JS files (non-type-checked). @default DEFAULT_FILES_JS */
   filesJs?: string[];
 
-  /** Globs for TS files (strict, type-checked). @default DEFAULT_FILES */
+  /** Globs for TS files (strict, type-checked). @default DEFAULT_FILES_TS */
   filesTs?: string[];
 
   /** Globals for TS and JS files. @default DEFAULT_GLOBALS */
@@ -39,20 +40,35 @@ export interface CreateConfigOptions {
   /** Globs skipped by this preset only; other configs still lint them. @default [] */
   ignores?: string[];
 
-  /** Plugins for JS files. */
+  /**
+   * Plugin map for JS files. If provided, replaces the default plugin map.
+   * @default DEFAULT_PLUGINS_JS
+   */
   pluginsJs?: Record<string, Plugin>;
 
-  /** Plugins for TS files. */
+  /**
+   * Plugin map for TS files. If provided, replaces the default plugin map.
+   * @default DEFAULT_PLUGINS_TS
+   */
   pluginsTs?: Record<string, Plugin>;
 
-  /** Extra rules for JS files, includes stylistic rules by default`. @default DEFAULT_RULES_JS */
+  /**
+   * Rules applied to JS files after shared rules; overrides same-named shared rules.
+   * @default DEFAULT_RULES_JS
+   */
   rulesJs?: Linter.RulesRecord;
 
-  /** Extra rules for TS files, includes stylistic rules by default`. @default DEFAULT_RULES_TS */
+  /**
+   * Rules applied to TS files after shared rules; overrides same-named shared rules.
+   * @default DEFAULT_RULES_TS
+   */
   rulesTs?: Linter.RulesRecord;
 
-  /** Stylistic rules for TS and JS files. @default DEFAULT_RULES_STYLISTIC */
-  stylisticRules?: Linter.RulesRecord;
+  /**
+   * Rules applied to both JS and TS files. Language-specific rules take precedence.
+   * @default DEFAULT_RULES_SHARED
+   */
+  rulesShared?: Linter.RulesRecord;
 
   /** Root for resolving `tsconfig.json`; usually `import.meta.dirname`. */
   tsconfigRootDir?: string;
@@ -75,6 +91,7 @@ export function createConfig({
   pluginsTs = DEFAULT_PLUGINS_TS,
   rulesJs = DEFAULT_RULES_JS,
   rulesTs = DEFAULT_RULES_TS,
+  rulesShared = DEFAULT_RULES_SHARED,
   tsconfigRootDir,
 }: CreateConfigOptions = {}): Config[] {
   return defineConfig([
@@ -98,7 +115,10 @@ export function createConfig({
           tsconfigRootDir,
         },
       },
-      rules: rulesTs,
+      rules: {
+        ...rulesShared,
+        ...rulesTs,
+      },
     },
     {
       name: 'preset/js',
@@ -107,7 +127,10 @@ export function createConfig({
       ignores,
       plugins: pluginsJs,
       languageOptions: { globals },
-      rules: rulesJs,
+      rules: {
+        ...rulesShared,
+        ...rulesJs,
+      },
     },
   ]);
 }

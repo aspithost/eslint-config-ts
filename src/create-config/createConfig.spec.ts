@@ -26,7 +26,7 @@ describe('createConfig', () => {
       pluginsTs: { 'my-ts-plugin': {} },
       rulesJs: { 'no-console': 'warn' },
       rulesTs: { '@typescript-eslint/no-unused-vars': 'warn' },
-      stylisticRules: { '@stylistic/semi': ['error', 'never'] },
+      rulesShared: { '@stylistic/semi': ['error', 'never'] },
       tsconfigRootDir: '/tmp',
     });
 
