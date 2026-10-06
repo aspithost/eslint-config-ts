@@ -1,8 +1,8 @@
-import type { Linter } from 'eslint';
 import type { Plugin } from '@eslint/core';
-import _globals from 'globals';
 import stylistic from '@stylistic/eslint-plugin';
+import type { Linter } from 'eslint';
 import { importX } from 'eslint-plugin-import-x';
+import _globals from 'globals';
 
 export const DEFAULT_FILES_JS = ['**/*.{js,mjs,cjs,jsx}'];
 export const DEFAULT_FILES_TS = ['**/*.{ts,mts,cts,tsx}'];
@@ -22,6 +22,11 @@ const DEFAULT_RULES_ESLINT: Linter.RulesRecord = {
 
 const DEFAULT_RULES_IMPORT_X: Linter.RulesRecord = {
   'import-x/order': ['error', {
+    'alphabetize': {
+      caseInsensitive: true,
+      order: 'asc',
+      orderImportKind: 'desc',
+    },
     'newlines-between': 'always',
   }],
 };
