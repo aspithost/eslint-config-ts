@@ -1,6 +1,6 @@
 {
   "name": "@abelspithost/eslint-config-ts",
-  "version": "2.6.0",
+  "version": "3.0.0",
   "description": "ESLint configuration preset",
   "keywords": [
     "eslint",
@@ -54,11 +54,13 @@
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
     "eslint-plugin-import-x": "^4.17.1",
+    "eslint-plugin-jsdoc": "^65.2.0",
+    "eslint-plugin-tsdoc": "^0.5.4",
     "globals": "^17.13.0",
-    "typescript-eslint": "^8.71.0"
+    "typescript-eslint": "^8.71.1"
   },
   "devDependencies": {
-    "@abelspithost/commitlint": "^0.1.7",
+    "@abelspithost/commitlint": "^0.1.8",
     "@abelspithost/tsconfig-node": "^0.1.1",
     "@abelspithost/vitest-config": "^0.1.0",
     "@commitlint/cli": "^21.2.3",
