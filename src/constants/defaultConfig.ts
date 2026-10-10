@@ -2,6 +2,7 @@ import type { Plugin } from '@eslint/core';
 import stylistic from '@stylistic/eslint-plugin';
 import type { Linter } from 'eslint';
 import { importX } from 'eslint-plugin-import-x';
+import tsdoc from 'eslint-plugin-tsdoc';
 import _globals from 'globals';
 
 export const DEFAULT_FILES_JS = ['**/*.{js,mjs,cjs,jsx}'];
@@ -15,33 +16,53 @@ export const DEFAULT_GLOBAL_IGNORES = [
 ];
 
 const DEFAULT_RULES_ESLINT: Linter.RulesRecord = {
-  'sort-imports': ['error', {
-    'ignoreDeclarationSort': true,
-  }],
+  'sort-imports': [
+    'error',
+    {
+      'ignoreDeclarationSort': true,
+    },
+  ],
 };
 
 const DEFAULT_RULES_IMPORT_X: Linter.RulesRecord = {
-  'import-x/order': ['error', {
-    'alphabetize': {
-      caseInsensitive: true,
-      order: 'asc',
-      orderImportKind: 'desc',
+  'import-x/order': [
+    'error',
+    {
+      'alphabetize': {
+        caseInsensitive: true,
+        order: 'asc',
+        orderImportKind: 'desc',
+      },
+      'newlines-between': 'always',
     },
-    'newlines-between': 'always',
-  }],
+  ],
 };
 
 const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
-  '@stylistic/array-bracket-newline': ['error', { minItems: 3 }],
-  '@stylistic/array-element-newline': ['error', {
-    consistent: true,
-    minItems: 3,
-  }],
+  '@stylistic/array-bracket-newline': [
+    'error',
+    {
+      minItems: 3,
+      multiline: true,
+    },
+  ],
+  '@stylistic/array-bracket-spacing': ['error', 'never'],
+  '@stylistic/array-element-newline': [
+    'error',
+    {
+      consistent: true,
+      minItems: 3,
+      multiline: true,
+    },
+  ],
   '@stylistic/comma-dangle': ['error', 'always-multiline'],
-  '@stylistic/comma-spacing': ['error', {
-    before: false,
-    after: true,
-  }],
+  '@stylistic/comma-spacing': [
+    'error',
+    {
+      before: false,
+      after: true,
+    },
+  ],
   '@stylistic/eol-last': 'error',
   '@stylistic/max-len': ['error', { code: 100 }],
   '@stylistic/indent': [
@@ -49,65 +70,76 @@ const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
     2,
     { 'SwitchCase': 1 },
   ],
-  '@stylistic/member-delimiter-style': ['error', {
-    multiline: {
-      delimiter: 'semi',
-      requireLast: true,
+  '@stylistic/member-delimiter-style': [
+    'error',
+    {
+      multiline: {
+        delimiter: 'semi',
+        requireLast: true,
+      },
+      multilineDetection: 'brackets',
+      singleline: {
+        delimiter: 'semi',
+        requireLast: false,
+      },
     },
-    multilineDetection: 'brackets',
-    singleline: {
-      delimiter: 'semi',
-      requireLast: false,
-    },
-  }],
+  ],
   '@stylistic/no-multi-spaces': 'error',
-  '@stylistic/no-multiple-empty-lines': ['error', {
-    max: 1,
-    maxEOF: 0,
-  }],
+  '@stylistic/no-multiple-empty-lines': [
+    'error',
+    {
+      max: 1,
+      maxEOF: 0,
+    },
+  ],
   '@stylistic/no-trailing-spaces': 'error',
   '@stylistic/no-whitespace-before-property': 'error',
   '@stylistic/object-curly-spacing': ['error', 'always'],
-  '@stylistic/object-curly-newline': ['error', {
-    ExportDeclaration: {
-      minProperties: 3,
-      multiline: true,
-      consistent: true,
+  '@stylistic/object-curly-newline': [
+    'error',
+    {
+      ExportDeclaration: {
+        minProperties: 3,
+        multiline: true,
+        consistent: true,
+      },
+      ImportDeclaration: {
+        minProperties: 3,
+        multiline: true,
+        consistent: true,
+      },
+      ObjectExpression: {
+        minProperties: 3,
+        multiline: true,
+        consistent: true,
+      },
+      ObjectPattern: {
+        minProperties: 3,
+        multiline: true,
+        consistent: true,
+      },
+      TSEnumBody: {
+        minProperties: 3,
+        multiline: true,
+        consistent: true,
+      },
+      TSInterfaceBody: {
+        minProperties: 3,
+        multiline: true,
+        consistent: true,
+      },
+      TSTypeLiteral: {
+        minProperties: 3,
+        multiline: true,
+        consistent: true,
+      },
     },
-    ImportDeclaration: {
-      minProperties: 3,
-      multiline: true,
-      consistent: true,
-    },
-    ObjectExpression: {
-      minProperties: 3,
-      multiline: true,
-      consistent: true,
-    },
-    ObjectPattern: {
-      minProperties: 3,
-      multiline: true,
-      consistent: true,
-    },
-    TSEnumBody: {
-      minProperties: 3,
-      multiline: true,
-      consistent: true,
-    },
-    TSInterfaceBody: {
-      minProperties: 3,
-      multiline: true,
-      consistent: true,
-    },
-    TSTypeLiteral: {
-      minProperties: 3,
-      multiline: true,
-      consistent: true,
-    },
-  }],
+  ],
   '@stylistic/object-property-newline': 'error',
-  '@stylistic/quotes': ['error',
-    'single'],
+  '@stylistic/quotes': [
+    'error',
+    'single',
+  ],
   '@stylistic/semi': ['error', 'always'],
 };
 
@@ -118,21 +150,31 @@ export const DEFAULT_RULES_SHARED: Linter.RulesRecord = {
 };
 
 export const DEFAULT_RULES_JS: Linter.RulesRecord = {
-  'no-unused-vars': ['error', {
-    varsIgnorePattern: '^_',
-    argsIgnorePattern: '^_',
-  }],
+  'no-unused-vars': [
+    'error',
+    {
+      varsIgnorePattern: '^_',
+      argsIgnorePattern: '^_',
+    },
+  ],
 };
 
 export const DEFAULT_RULES_TS: Linter.RulesRecord = {
-  '@typescript-eslint/consistent-type-imports': ['error', {
-    prefer: 'type-imports',
-    fixStyle: 'separate-type-imports',
-  }],
-  '@typescript-eslint/no-unused-vars': ['error', {
-    varsIgnorePattern: '^_',
-    argsIgnorePattern: '^_',
-  }],
+  'tsdoc/syntax': 'error',
+  '@typescript-eslint/consistent-type-imports': [
+    'error',
+    {
+      prefer: 'type-imports',
+      fixStyle: 'separate-type-imports',
+    },
+  ],
+  '@typescript-eslint/no-unused-vars': [
+    'error',
+    {
+      varsIgnorePattern: '^_',
+      argsIgnorePattern: '^_',
+    },
+  ],
 };
 
 const PLUGIN_IMPORT_X: Record<string, Plugin> = {
@@ -141,11 +183,15 @@ const PLUGIN_IMPORT_X: Record<string, Plugin> = {
 const PLUGIN_STYLISTIC: Record<string, Plugin> = {
   '@stylistic': stylistic,
 };
-export const DEFAULT_PLUGINS_JS: Record<string, Plugin> = {
-  ...PLUGIN_STYLISTIC,
-  ...PLUGIN_IMPORT_X,
+const PLUGIN_TSDOC: Record<string, Plugin> = {
+  'tsdoc': tsdoc,
 };
-export const DEFAULT_PLUGINS_TS: Record<string, Plugin> = {
-  ...PLUGIN_STYLISTIC,
+const PLUGINS_SHARED: Record<string, Plugin> = {
   ...PLUGIN_IMPORT_X,
+  ...PLUGIN_STYLISTIC,
+};
+export const DEFAULT_PLUGINS_JS: Record<string, Plugin> = PLUGINS_SHARED;
+export const DEFAULT_PLUGINS_TS: Record<string, Plugin> = {
+  ...PLUGINS_SHARED,
+  ...PLUGIN_TSDOC,
 };
