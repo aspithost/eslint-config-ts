@@ -9,12 +9,12 @@ Includes:
 
 - ESLint recommended rules (TS and JS)
 - [eslint-plugin-jsdoc](https://github.com/gajus/eslint-plugin-jsdoc) recommended rules for JS files
-- [typescript-eslint](https://typescript-eslint.io/) strict type-checked and stylistic type-checked rules for TS files, via `projectService`
+- [typescript-eslint](https://typescript-eslint.io/) strict and stylistic rules that use TypeScript type information, via `projectService`
 - Stylistic rules for TS and JS files (quotes, trailing commas, semicolons, 2-space indent, etc.)
 - Consistent type imports (`import type`) in TS files
-- Unused variables and arguments allowed when prefixed with `_`
+- Unused variables and arguments whose names start with `_` pass the unused-name checks
 
-JS files are linted without type information.
+This ESLint preset checks JS files without type information.
 
 ## Installation
 
@@ -38,9 +38,11 @@ const eslintConfig: Config[] = createConfig({
 export default eslintConfig;
 ```
 
+This repo also exports `createConfigJs` and `createConfigTs` directly, so you can use either of them if you want only a JS or TS config.
+
 ### Custom options
 
-All options are optional:
+You can specify optional options:
 
 ```ts
 import globals from 'globals';
@@ -63,21 +65,21 @@ export default createConfig({
 
 | Option                | Description                                                          |
 | --------------------- | -------------------------------------------------------------------- |
-| `globalIgnores`       | Globs ignored by the entire ESLint run, including later configs.     |
-| `globals`             | Globals for TS and JS files.                                         |
-| `ignores`             | Globs skipped by this preset only; other configs can still lint them. |
-| `js.files`            | Globs for JS files (not type-checked).                               |
+| `globalIgnores`       | Globs that make ESLint and later configs ignore matching files.      |
+| `globals`             | Additional globals for TS and JS files; `createConfig` adds them to Node.js globals. |
+| `ignores`             | Globs that this preset skips while other configs can still lint matching files. |
+| `js.files`            | Globs for JS files; ESLint applies no type-aware rules to them.      |
 | `js.plugins`          | Additional JS plugins; same-named plugins override preset plugins.  |
 | `js.rules`            | Rules for JS files; same-named rules override defaults.              |
 | `ts.allowDefaultProject` | Extra TS file globs outside `tsconfig.json` to include in project service. |
-| `ts.files`            | Globs for TS files (strict, type-checked).                            |
+| `ts.files`            | Globs for TS files; strict rules use TypeScript type information.     |
 | `ts.plugins`          | Additional TS plugins; same-named plugins override preset plugins.   |
 | `ts.rules`            | Rules for TS files; same-named rules override defaults.              |
 | `ts.tsconfigRootDir`  | Root for resolving `tsconfig.json`; usually `import.meta.dirname`.   |
 
-`ts.files` and `js.files` should not overlap, since type-checked rules fail on JS files.
+Keep `ts.files` and `js.files` separate; type-aware rules fail on JS files.
 
-Rule maps are merged with the defaults; a user-provided entry overrides the same-named default. Plugin maps are also merged with preset plugins; a user-provided plugin with the same name overrides the default.
+`createConfig` combines each rule map with its defaults; user-provided entries override same-named defaults. It also combines plugin maps with preset plugins; user-provided plugins override same-named defaults.
 
 ### Defaults
 
@@ -88,9 +90,9 @@ Rule maps are merged with the defaults; a user-provided entry overrides the same
 | `ignores`                | `[]`                                              |
 | `js.files`               | `['**/*.{js,mjs,cjs,jsx}']`                       |
 | `js.plugins`             | `import-x` and `@stylistic`                       |
-| `js.rules`               | `no-unused-vars` (`^_` names are allowed)         |
+| `js.rules`               | `no-unused-vars` ignores names that start with `_` |
 | `ts.allowDefaultProject` | `[]`                                              |
 | `ts.files`               | `['**/*.{ts,mts,cts,tsx}']`                       |
 | `ts.plugins`             | `import-x`, `@stylistic`, and `tsdoc`             |
 | `ts.rules`               | TSDoc syntax, type-only imports, and unused-name checks |
-| `ts.tsconfigRootDir`     | Not set                                           |
+| `ts.tsconfigRootDir`     | None                                              |
