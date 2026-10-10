@@ -8,6 +8,7 @@ A shared ESLint flat config for TypeScript projects, with JavaScript support.
 Includes:
 
 - ESLint recommended rules (TS and JS)
+- [eslint-plugin-jsdoc](https://github.com/gajus/eslint-plugin-jsdoc) recommended rules for JS files
 - [typescript-eslint](https://typescript-eslint.io/) strict type-checked and stylistic type-checked rules for TS files, via `projectService`
 - Stylistic rules for TS and JS files (quotes, trailing commas, semicolons, 2-space indent, etc.)
 - Consistent type imports (`import type`) in TS files
@@ -30,7 +31,9 @@ import type { Config } from 'eslint/config';
 import { createConfig } from '@abelspithost/eslint-config-ts';
 
 const eslintConfig: Config[] = createConfig({
-  tsconfigRootDir: import.meta.dirname,
+  ts: {
+    tsconfigRootDir: import.meta.dirname,
+  },
 });
 export default eslintConfig;
 ```
@@ -44,41 +47,50 @@ import globals from 'globals';
 import { createConfig } from '@abelspithost/eslint-config-ts';
 
 export default createConfig({
-  files: ['src/**/*.ts', 'lib/**/*.ts'],
-  jsFiles: ['scripts/**/*.js'],
   globals: { ...globals.browser, ...globals.node },
   globalIgnores: ['dist/**', 'node_modules/**'],
   ignores: ['**/*.generated.ts'],
-  tsconfigRootDir: import.meta.dirname,
+  js: {
+    files: ['scripts/**/*.js'],
+  },
+  ts: {
+    allowDefaultProject: ['*.config.ts'],
+    files: ['src/**/*.ts', 'lib/**/*.ts'],
+    tsconfigRootDir: import.meta.dirname,
+  },
 });
 ```
 
-| Option            | Description                                                          |
-| ----------------- | -------------------------------------------------------------------- |
-| `files`           | Globs for TS files (strict, type-checked).                           |
-| `jsFiles`         | Globs for JS files (not type-checked).                               |
-| `globals`         | Globals for TS and JS files.                                         |
-| `globalIgnores`   | Globs ignored by the entire ESLint run, including later configs.     |
-| `ignores`         | Globs skipped by this preset only; other configs still lint them.    |
-| `stylisticRules`  | Stylistic rules for TS and JS files.                                 |
-| `tsRules`         | Extra rules for TS files, merged after `stylisticRules`.             |
-| `jsRules`         | Extra rules for JS files, merged after `stylisticRules`.             |
-| `tsconfigRootDir` | Root for resolving `tsconfig.json`; usually `import.meta.dirname`.   |
+| Option                | Description                                                          |
+| --------------------- | -------------------------------------------------------------------- |
+| `globalIgnores`       | Globs ignored by the entire ESLint run, including later configs.     |
+| `globals`             | Globals for TS and JS files.                                         |
+| `ignores`             | Globs skipped by this preset only; other configs can still lint them. |
+| `js.files`            | Globs for JS files (not type-checked).                               |
+| `js.plugins`          | Additional JS plugins; same-named plugins override preset plugins.  |
+| `js.rules`            | Rules for JS files; same-named rules override defaults.              |
+| `ts.allowDefaultProject` | Extra TS file globs outside `tsconfig.json` to include in project service. |
+| `ts.files`            | Globs for TS files (strict, type-checked).                            |
+| `ts.plugins`          | Additional TS plugins; same-named plugins override preset plugins.   |
+| `ts.rules`            | Rules for TS files; same-named rules override defaults.              |
+| `ts.tsconfigRootDir`  | Root for resolving `tsconfig.json`; usually `import.meta.dirname`.   |
 
-`files` and `jsFiles` should not overlap, since type-checked rules fail on JS files.
+`ts.files` and `js.files` should not overlap, since type-checked rules fail on JS files.
 
-Rule options replace their defaults rather than merging with them. To extend the defaults, spread your own rules into a full set.
+Rule maps are merged with the defaults; a user-provided entry overrides the same-named default. Plugin maps are also merged with preset plugins; a user-provided plugin with the same name overrides the default.
 
 ### Defaults
 
-| Option            | Default                                          |
-| ----------------- | ------------------------------------------------ |
-| `files`           | `['**/*.{ts,mts,cts,tsx}']`                      |
-| `jsFiles`         | `['**/*.{js,mjs,cjs,jsx}']`                      |
-| `globals`         | `globals.node`                                   |
-| `globalIgnores`   | `['**/build/**', '**/coverage/**', '**/dist/**']` |
-| `ignores`         | `[]`                                             |
-| `stylisticRules`  | See [`index.ts`](./index.ts)                     |
-| `tsRules`         | `consistent-type-imports`, `no-unused-vars` (`^_`) |
-| `jsRules`         | `no-unused-vars` (`^_`)                          |
-| `tsconfigRootDir` | Not set                                          |
+| Option                   | Default                                           |
+| ------------------------ | ------------------------------------------------- |
+| `globalIgnores`          | `['**/build/**', '**/coverage/**', '**/dist/**']` |
+| `globals`                | `globals.node`                                    |
+| `ignores`                | `[]`                                              |
+| `js.files`               | `['**/*.{js,mjs,cjs,jsx}']`                       |
+| `js.plugins`             | `import-x` and `@stylistic`                       |
+| `js.rules`               | `no-unused-vars` (`^_` names are allowed)         |
+| `ts.allowDefaultProject` | `[]`                                              |
+| `ts.files`               | `['**/*.{ts,mts,cts,tsx}']`                       |
+| `ts.plugins`             | `import-x`, `@stylistic`, and `tsdoc`             |
+| `ts.rules`               | TSDoc syntax, type-only imports, and unused-name checks |
+| `ts.tsconfigRootDir`     | Not set                                           |
