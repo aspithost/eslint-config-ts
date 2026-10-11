@@ -64,12 +64,15 @@ const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
     },
   ],
   '@stylistic/eol-last': 'error',
-  '@stylistic/max-len': ['error', { code: 100 }],
+  '@stylistic/function-call-argument-newline': ['error', 'consistent'],
+  '@stylistic/function-call-spacing': ['error', 'never'],
+  '@stylistic/function-paren-newline': ['error', 'multiline-arguments'],
   '@stylistic/indent': [
     'error',
     2,
     { 'SwitchCase': 1 },
   ],
+  '@stylistic/max-len': ['error', { code: 100 }],
   '@stylistic/member-delimiter-style': [
     'error',
     {
