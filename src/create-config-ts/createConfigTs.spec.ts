@@ -1,15 +1,15 @@
 import type { LanguageOptions } from '@eslint/core';
 import { defineConfig } from 'eslint/config';
 
-import { createConfigTs } from './createConfigTs.js';
-
 import {
   DEFAULT_FILES_TS,
   DEFAULT_GLOBALS,
   DEFAULT_PLUGINS_TS,
   DEFAULT_RULES_SHARED,
   DEFAULT_RULES_TS,
-} from '@/constants/defaultConfig.js';
+} from '../constants/defaultConfig.js';
+
+import { createConfigTs } from './createConfigTs.js';
 
 vi.mock('eslint/config', () => ({
   defineConfig: vi.fn(),

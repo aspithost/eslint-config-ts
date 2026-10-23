@@ -3,10 +3,10 @@ import {
   describe, expect, it,
 } from 'vitest';
 
-import { createConfig } from './createConfig.js';
+import { type CreateConfigJsOptions, createConfigJs } from '../create-config-js/createConfigJs.js';
+import { type CreateConfigTsOptions, createConfigTs } from '../create-config-ts/createConfigTs.js';
 
-import { type CreateConfigJsOptions, createConfigJs } from '@/create-config-js/createConfigJs.js';
-import { type CreateConfigTsOptions, createConfigTs } from '@/create-config-ts/createConfigTs.js';
+import { createConfig } from './createConfig.js';
 
 vi.mock('@/create-config-js/createConfigJs.js', () => ({
   createConfigJs: vi.fn(() => []),
