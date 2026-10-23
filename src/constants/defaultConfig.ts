@@ -55,6 +55,7 @@ const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
       multiline: true,
     },
   ],
+  '@stylistic/brace-style': 'error',
   '@stylistic/comma-dangle': ['error', 'always-multiline'],
   '@stylistic/comma-spacing': [
     'error',
@@ -63,6 +64,7 @@ const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
       after: true,
     },
   ],
+  '@stylistic/comma-style': ['error', 'last'],
   '@stylistic/eol-last': 'error',
   '@stylistic/function-call-argument-newline': ['error', 'consistent'],
   '@stylistic/function-call-spacing': ['error', 'never'],
@@ -71,6 +73,20 @@ const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
     'error',
     2,
     { 'SwitchCase': 1 },
+  ],
+  '@stylistic/key-spacing': [
+    'error',
+    {
+      afterColon: true,
+      mode: 'strict',
+    },
+  ],
+  '@stylistic/keyword-spacing': [
+    'error',
+    {
+      before: true,
+      after: true,
+    },
   ],
   '@stylistic/max-len': ['error', { code: 100 }],
   '@stylistic/member-delimiter-style': [
@@ -97,6 +113,7 @@ const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
   ],
   '@stylistic/no-trailing-spaces': 'error',
   '@stylistic/no-whitespace-before-property': 'error',
+  '@stylistic/nonblock-statement-body-position': ['error', 'beside'],
   '@stylistic/object-curly-spacing': ['error', 'always'],
   '@stylistic/object-curly-newline': [
     'error',
@@ -139,11 +156,20 @@ const DEFAULT_RULES_STYLISTIC: Linter.RulesRecord = {
     },
   ],
   '@stylistic/object-property-newline': 'error',
+  '@stylistic/operator-linebreak': ['error', 'before'],
   '@stylistic/quotes': [
     'error',
     'single',
   ],
   '@stylistic/semi': ['error', 'always'],
+  '@stylistic/semi-spacing': 'error',
+  '@stylistic/semi-style': ['error', 'last'],
+  '@stylistic/space-before-blocks': 'error',
+  '@stylistic/space-in-parens': ['error', 'never'],
+  '@stylistic/space-infix-ops': 'error',
+  '@stylistic/spaced-comment': ['error', 'always'],
+  '@stylistic/switch-colon-spacing': 'error',
+  '@stylistic/template-curly-spacing': 'error',
 };
 
 export const DEFAULT_RULES_SHARED: Linter.RulesRecord = {

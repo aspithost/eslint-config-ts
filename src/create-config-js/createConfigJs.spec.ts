@@ -1,10 +1,10 @@
 import { defineConfig } from 'eslint/config';
 
-import { createConfigJs } from './createConfigJs.js';
-
 import {
   DEFAULT_FILES_JS, DEFAULT_GLOBALS, DEFAULT_PLUGINS_JS, DEFAULT_RULES_JS, DEFAULT_RULES_SHARED,
-} from '@/constants/defaultConfig.js';
+} from '../constants/defaultConfig.js';
+
+import { createConfigJs } from './createConfigJs.js';
 
 vi.mock('eslint/config', () => ({
   defineConfig: vi.fn(),
