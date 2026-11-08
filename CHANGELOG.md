@@ -1,5 +1,11 @@
 I created this changelog with [@abelspithost/conventional-commits-changelog](https://github.com/aspithost/conventional-commits-changelog)
 
+## 3.2.2 (2026-11-09)
+
+### :books: Documentation
+
+* adds changelog retroactively ([9e5ce5d](https://github.com/aspithost/eslint-config-ts/commit/9e5ce5d3e9bc397fba475ac1fa212900905958f4))
+
 ## 3.2.1 (2026-11-06)
 
 ## 3.2.0 (2026-10-23)
