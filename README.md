@@ -1,7 +1,11 @@
 # @abelspithost/eslint-config-ts
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aspithost_eslint-config-ts&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=aspithost_eslint-config-ts)
 ![NPM Version](https://img.shields.io/npm/v/@abelspithost/eslint-config-ts)
+![Build](https://img.shields.io/github/actions/workflow/status/aspithost/eslint-config-ts/cicd.yml)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aspithost_eslint-config-ts&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=aspithost_eslint-config-ts)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=aspithost_eslint-config-ts&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=aspithost_eslint-config-ts)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aspithost_eslint-config-ts&metric=coverage)](https://sonarcloud.io/summary/new_code?id=aspithost_eslint-config-ts)
+
 
 A shared ESLint flat config for TypeScript projects, with JavaScript support.
 

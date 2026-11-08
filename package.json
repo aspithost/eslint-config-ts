@@ -53,14 +53,15 @@
   "dependencies": {
     "@eslint/js": "^10.0.1",
     "@stylistic/eslint-plugin": "^5.10.0",
-    "eslint-plugin-import-x": "^4.17.1",
-    "eslint-plugin-jsdoc": "^65.4.3",
+    "eslint-plugin-import-x": "^4.18.0",
+    "eslint-plugin-jsdoc": "^65.4.5",
     "eslint-plugin-tsdoc": "^0.5.4",
     "globals": "^17.14.0",
     "typescript-eslint": "^8.72.1"
   },
   "devDependencies": {
-    "@abelspithost/commitlint": "^0.1.10",
+    "@abelspithost/commitlint": "^0.2.3",
+    "@abelspithost/conventional-commits-changelog": "^0.0.3",
     "@abelspithost/tsconfig-node": "^0.1.2",
     "@abelspithost/vitest-config": "^0.1.1",
     "@commitlint/cli": "^21.2.4",
