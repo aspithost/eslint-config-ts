@@ -1,5 +1,11 @@
 I created this changelog with [@abelspithost/conventional-commits-changelog](https://github.com/aspithost/conventional-commits-changelog)
 
+## 3.2.3 (2026-11-22)
+
+### :construction_worker: Continuous Integration
+
+* update sonar project properties ([97e8474](https://github.com/aspithost/eslint-config-ts/commit/97e8474374405f7adb3eccd30d4dbbd4b685729e))
+
 ## 3.2.2 (2026-11-09)
 
 ### :books: Documentation
