@@ -34,11 +34,7 @@ Create an `eslint.config.ts` in your project root:
 import type { Config } from 'eslint/config';
 import { createConfig } from '@abelspithost/eslint-config-ts';
 
-const eslintConfig: Config[] = createConfig({
-  ts: {
-    tsconfigRootDir: import.meta.dirname,
-  },
-});
+const eslintConfig: Config[] = createConfig();
 export default eslintConfig;
 ```
 
